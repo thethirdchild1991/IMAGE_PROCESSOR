@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "worker.h"
 namespace Ui {
 class MainWindow;
 }
@@ -15,8 +15,15 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    public slots:
+    void browseSRCFolder();
+    void browseDSTFolder();
+    void startBtnClicked();
+
+
 private:
     Ui::MainWindow *ui;
+    Worker* mWorker;
 };
 
 #endif // MAINWINDOW_H
