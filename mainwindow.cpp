@@ -3,7 +3,9 @@
 
 #include <QDebug>
 #include <QFileDialog>
-#include <QDir>
+#include <QImage>
+#include <QImageReader>
+#include <QPixmap>
 
 #include "worker.h"
 
@@ -17,6 +19,23 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->browseSRCPushButton,    &QPushButton::clicked, this, &MainWindow::browseSRCFolder);
     connect(ui->browseDSTPushButton,    &QPushButton::clicked, this, &MainWindow::browseDSTFolder);
     connect(ui->startPushButton,        &QPushButton::clicked, this, &MainWindow::startBtnClicked);
+
+    ui->srcFolderLineEdit->setText(
+        mSettings.value(
+                        Settings::settingsQStringNames(
+                            Settings::settingsNames::SRCFolder
+                            ),
+                        QVariant(QString("")) ).toString()
+                        );
+
+    ui->dstFolderLineEdit->setText(
+        mSettings.value(
+                        Settings::settingsQStringNames(
+                            Settings::settingsNames::DSTFolder
+                            ),
+                        QVariant(QString("")) ).toString()
+                        );
+
 }
 
 MainWindow::~MainWindow()
@@ -26,27 +45,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::browseSRCFolder(){
     ui->srcFolderLineEdit->setText( QFileDialog::getExistingDirectory() );
+    mSettings.setValue(
+        Settings::settingsQStringNames( Settings::settingsNames::SRCFolder ),
+        ui->srcFolderLineEdit->text()
+    );
 
 }
 void MainWindow::browseDSTFolder(){
     ui->dstFolderLineEdit->setText( QFileDialog::getExistingDirectory() );
-
+    mSettings.setValue(
+        Settings::settingsQStringNames( Settings::settingsNames::DSTFolder ),
+        ui->dstFolderLineEdit->text()
+    );
 }
 
 void MainWindow::startBtnClicked(){
-    auto pathString = ui->srcFolderLineEdit->text();
-
-//    QDir srcDir(pathString);
-//    srcDir.setFilter( QDir::Files );
-//    srcDir.setSorting( QDir::Name );
-
-//    auto filenamesList = srcDir.entryList();
+    emit StartWorker( ui->srcFolderLineEdit->text() );
+}
 
 
-//    for( auto filename : filenamesList){
-//        qDebug() << filename;
-//    }
-    mWorker = new Worker(pathString);
-    mWorker->start();
-
+void MainWindow::setImg( ImageSharedPointer_t pImg ){
+    qDebug() << "NEW IMG : " << pImg->size() << QThread::currentThreadId();
+    ui->imgViewer->setPixmap( QPixmap::fromImage( *pImg ) );
+//    ui->imgViewer->move(1,1);
 }

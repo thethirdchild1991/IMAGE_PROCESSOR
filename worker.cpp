@@ -2,26 +2,46 @@
 
 
 #include <QDebug>
+#include <QFileInfo>
 #include <QImageReader>
+
+Worker::Worker(){
+
+}
 
 Worker::Worker(QString folderPath) : mFolder(folderPath)
 {
 
 }
 
-void Worker::run (){
+void Worker::doWork( QString path ){
 
-    mFolder.setFilter( QDir::Files );
+
+    setFolderPath(path);
+
+    qDebug() << "doWork: " << path;
+
+    if(!mFolder.exists())
+        return;
+
+    QStringList filters;
+    filters << "*.png" << "*.jpg" << "*.jpeg";
+    mFolder.setNameFilters( filters );
     mFolder.setSorting( QDir::Name );
 
     auto filenamesList = mFolder.entryList();
 
-    while(1)
-    for(auto filename : filenamesList){
-        qDebug() << filename;
-        QImageReader qimr(filename);
-        mImage = new QImage(qimr.read());
-        delete mImage;
-        QThread::msleep(16);
-    }
+//    while(1)
+        for(const auto& filename : filenamesList){
+
+            QImageReader qimr( mFolder.path() + QDir::separator() + filename);
+
+            emit newImage( std::make_shared<QImage>( qimr.read() ) );
+
+            QThread::msleep( uint32_t(1000)/mFreq );
+        }
+}
+
+void Worker::setFolderPath( QString path ){
+    mFolder = QDir(path);
 }

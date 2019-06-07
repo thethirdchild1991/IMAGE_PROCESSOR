@@ -17,10 +17,10 @@
    <widget class="QPushButton" name="startPushButton">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>230</y>
-      <width>131</width>
-      <height>61</height>
+      <x>650</x>
+      <y>30</y>
+      <width>271</width>
+      <height>171</height>
      </rect>
     </property>
     <property name="text">
@@ -70,6 +70,19 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QLabel" name="imgViewer">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>270</y>
+      <width>271</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>IMAGE Viewer</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
