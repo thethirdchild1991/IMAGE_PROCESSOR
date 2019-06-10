@@ -27,11 +27,16 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
+    ImgReader.cpp \
+    imgprocessor.cpp
     worker.cpp \
     cogprocessor.cpp
 
 HEADERS += \
         mainwindow.h \
+    ImgReader.h \
+    common.h \
+    imgprocessor.h
     worker.h \
     cogprocessor.h
 

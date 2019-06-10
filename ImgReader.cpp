@@ -1,20 +1,18 @@
-#include "worker.h"
-
-
-#include <QDebug>
-#include <QFileInfo>
+#include "ImgReader.h"
 #include <QImageReader>
+#include <mutex>
 
-Worker::Worker(){
-
-}
-
-Worker::Worker(QString folderPath) : mFolder(folderPath)
+ImgReader::ImgReader( ImgQueueSharedPointer_t queue ) : mQueue(queue)
 {
 
 }
 
-void Worker::doWork( QString path ){
+ImgReader::ImgReader(QString folderPath) : mFolder(folderPath)
+{
+
+}
+
+void ImgReader::doWork( QString path ){
 
 
     setFolderPath(path);
@@ -35,13 +33,22 @@ void Worker::doWork( QString path ){
         for(const auto& filename : filenamesList){
 
             QImageReader qimr( mFolder.path() + QDir::separator() + filename);
+            ImageSharedPointer_t pImg = std::make_shared<QImage>( qimr.read() );
 
-            emit newImage( std::make_shared<QImage>( qimr.read() ) );
+            queMutex.lock();
+            mQueue->enqueue( pImg );
+            queMutex.unlock();
+
+            emit newImage( pImg );
 
             QThread::msleep( uint32_t(1000)/mFreq );
         }
 }
 
-void Worker::setFolderPath( QString path ){
+void ImgReader::setFolderPath( QString path ){
     mFolder = QDir(path);
+}
+
+void ImgReader::frequency( uint8_t freq ){
+    mFreq = freq;
 }

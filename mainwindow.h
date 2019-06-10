@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <QSettings>
 #include <QDir>
-#include "worker.h"
+#include "common.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -47,8 +48,7 @@ public:
     void setImg( ImageSharedPointer_t pImg );
 
 private:
-    Ui::MainWindow *ui;
-    Worker* mWorker;
+    Ui::MainWindow *ui;    
     QSettings mSettings = { "settings.ini", QSettings::Format::IniFormat };
 };
 
