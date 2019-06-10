@@ -3,11 +3,10 @@
 
 #include <QDebug>
 #include <QFileDialog>
-#include <QImage>
 #include <QImageReader>
 #include <QPixmap>
 
-#include "worker.h"
+
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -65,7 +64,7 @@ void MainWindow::startBtnClicked(){
 
 
 void MainWindow::setImg( ImageSharedPointer_t pImg ){
-    qDebug() << "NEW IMG : " << pImg->size() << QThread::currentThreadId();
+//    qDebug() << "NEW IMG : " << pImg->size();
     ui->imgViewer->setPixmap( QPixmap::fromImage( *pImg ) );
 //    ui->imgViewer->move(1,1);
 }

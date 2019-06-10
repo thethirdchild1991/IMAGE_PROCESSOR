@@ -27,11 +27,14 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    worker.cpp
+    ImgReader.cpp \
+    imgprocessor.cpp
 
 HEADERS += \
         mainwindow.h \
-    worker.h
+    ImgReader.h \
+    common.h \
+    imgprocessor.h
 
 FORMS += \
         mainwindow.ui
