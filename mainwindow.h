@@ -13,13 +13,15 @@ class MainWindow;
 namespace Settings {
 enum class settingsNames{
     SRCFolder,
-    DSTFolder
+    DSTFolder,
+    SingleImgPath
 };
 
 static QString settingsQStringNames( const settingsNames name ){
     const QMap<settingsNames, QString> map = {
-        {settingsNames::SRCFolder, QString("SRCFolder") },
-        {settingsNames::DSTFolder, QString("DSTFolder") },
+        {settingsNames::SRCFolder,      QString("SRCFolder") },
+        {settingsNames::DSTFolder,      QString("DSTFolder") },
+        {settingsNames::SingleImgPath,  QString("SingleImgPath")}
     };
     return map.value(name);
 }
@@ -35,10 +37,12 @@ public:
 
     signals:
     void StartWorker( QString );
+    void StartSingleProcessor( QString );
 
     public slots:
     void browseSRCFolder();
     void browseDSTFolder();
+    void browseSingleImg();
     void startBtnClicked();
     void setImg( ImageSharedPointer_t pImg );
 

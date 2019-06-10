@@ -16,9 +16,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->browseSRCPushButton,    &QPushButton::clicked, this, &MainWindow::browseSRCFolder);
-    connect(ui->browseDSTPushButton,    &QPushButton::clicked, this, &MainWindow::browseDSTFolder);
-    connect(ui->startPushButton,        &QPushButton::clicked, this, &MainWindow::startBtnClicked);
+    connect(ui->browseSRCPushButton,        &QPushButton::clicked, this, &MainWindow::browseSRCFolder);
+    connect(ui->browseDSTPushButton,        &QPushButton::clicked, this, &MainWindow::browseDSTFolder);
+    connect(ui->browseSingleImgPushButton,  &QPushButton::clicked, this, &MainWindow::browseSingleImg);
+    connect(ui->startPushButton,            &QPushButton::clicked, this, &MainWindow::startBtnClicked);
 
     ui->srcFolderLineEdit->setText(
         mSettings.value(
@@ -26,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
                             Settings::settingsNames::SRCFolder
                             ),
                         QVariant(QString("")) ).toString()
-                        );
+    );
 
     ui->dstFolderLineEdit->setText(
         mSettings.value(
@@ -34,7 +35,17 @@ MainWindow::MainWindow(QWidget *parent) :
                             Settings::settingsNames::DSTFolder
                             ),
                         QVariant(QString("")) ).toString()
-                        );
+    );
+    ui->singleImgLineEdit->setText(
+        mSettings.value(
+                        Settings::settingsQStringNames(
+                            Settings::settingsNames::SingleImgPath
+                            ),
+                        QVariant(QString("")) ).toString()
+    );
+
+    ui->imgViewer->setScaledContents(true);
+
 
 }
 
@@ -59,8 +70,18 @@ void MainWindow::browseDSTFolder(){
     );
 }
 
+void MainWindow::browseSingleImg(){
+    qDebug() << "Browse";
+    ui->singleImgLineEdit->setText( QFileDialog::getOpenFileName() );
+    mSettings.setValue(
+        Settings::settingsQStringNames( Settings::settingsNames::SingleImgPath ),
+        ui->singleImgLineEdit->text()
+    );
+}
+
 void MainWindow::startBtnClicked(){
-    emit StartWorker( ui->srcFolderLineEdit->text() );
+//    emit StartWorker( ui->srcFolderLineEdit->text() );
+    emit StartSingleProcessor( ui->singleImgLineEdit->text() );
 }
 
 

@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    worker.cpp
+    worker.cpp \
+    cogprocessor.cpp
 
 HEADERS += \
         mainwindow.h \
-    worker.h
+    worker.h \
+    cogprocessor.h
 
 FORMS += \
         mainwindow.ui

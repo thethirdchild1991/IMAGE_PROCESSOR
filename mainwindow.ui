@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>965</width>
-    <height>658</height>
+    <height>809</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,62 +27,72 @@
      <string>START</string>
     </property>
    </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>30</y>
-      <width>541</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLineEdit" name="srcFolderLineEdit"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="browseSRCPushButton">
-       <property name="text">
-        <string>Source Folder</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>120</y>
-      <width>541</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLineEdit" name="dstFolderLineEdit"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="browseDSTPushButton">
-       <property name="text">
-        <string>Dest Folder</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QLabel" name="imgViewer">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>270</y>
-      <width>271</width>
-      <height>251</height>
+      <x>100</x>
+      <y>240</y>
+      <width>821</width>
+      <height>511</height>
      </rect>
     </property>
     <property name="text">
      <string>IMAGE Viewer</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>30</y>
+      <width>541</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="srcFolderLineEdit"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="browseSRCPushButton">
+         <property name="text">
+          <string>Source Folder</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="dstFolderLineEdit"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="browseDSTPushButton">
+         <property name="text">
+          <string>Dest Folder</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="singleImgLineEdit"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="browseSingleImgPushButton">
+         <property name="text">
+          <string>Img To Process</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
