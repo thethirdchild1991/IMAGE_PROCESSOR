@@ -3,7 +3,7 @@
 #include <QString>
 #include "ImgReader.h"
 #include "imgprocessor.h"
-#include "worker.h"
+
 #include "cogprocessor.h"
 
 int main(int argc, char *argv[])
@@ -14,25 +14,17 @@ int main(int argc, char *argv[])
 
     ImgQueueSharedPointer_t mQueue = std::make_shared<ImgQueue_t>();
 
-
-
-    QThread* thread = new QThread;
-    Worker* mWorker = new Worker();
     CogProcessor* mCogProcessor = new CogProcessor();
-
-
     MainWindow w;
 
     QList<QThread*> threadList;
 
-    mWorker->moveToThread(thread);
 
     QThread* imgReaderThread = new QThread;
     ImgReader* mImgReader = new ImgReader(mQueue);
-    mImgReader->moveToThread(imgReaderThread);
-    QObject::connect( &w, &MainWindow::StartWorker, mWorker, &Worker::doWork );
-    QObject::connect( &w, &MainWindow::StartSingleProcessor, mCogProcessor, &CogProcessor::process );
-    QObject::connect( mWorker, &Worker::newImage, &w, &MainWindow::setImg );
+
+
+    QObject::connect( &w, &MainWindow::StartSingleProcessor, mCogProcessor, &CogProcessor::process );    
     QObject::connect( mCogProcessor, &CogProcessor::ready, &w, &MainWindow::setImg );
 
     QObject::connect( &w, &MainWindow::StartWorker, mImgReader, &ImgReader::doWork );

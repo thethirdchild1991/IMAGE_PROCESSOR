@@ -16,7 +16,7 @@ void CogProcessor::process( QString imgPath ){
     auto img = std::make_shared<QImage>( 1600,1200, QImage::Format_Mono );
     auto mask = std::make_shared<QImage>( 1600,1200, QImage::Format_RGB888 );
 
-    qimr.read(img._Get());
+    qimr.read(img.get());
 
     std::vector<peaksBordersInColumn_t> peaksBorders;
 
