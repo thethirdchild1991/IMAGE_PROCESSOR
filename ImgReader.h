@@ -3,7 +3,6 @@
 
 #include <QDir>
 #include "common.h"
-#include <mutex>
 
 
 class ImgReader : public QObject

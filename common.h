@@ -1,6 +1,5 @@
 #ifndef COMMON_H
 #define COMMON_H
-
 #include <memory>
 #include <QThread>
 #include <QImage>
