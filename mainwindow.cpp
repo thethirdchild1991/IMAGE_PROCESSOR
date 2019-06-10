@@ -6,6 +6,7 @@
 #include <QImage>
 #include <QImageReader>
 #include <QPixmap>
+#include <QImageWriter>
 
 #include "worker.h"
 
@@ -88,5 +89,17 @@ void MainWindow::startBtnClicked(){
 void MainWindow::setImg( ImageSharedPointer_t pImg ){
     qDebug() << "NEW IMG : " << pImg->size() << QThread::currentThreadId();
     ui->imgViewer->setPixmap( QPixmap::fromImage( *pImg ) );
+
+    QString srcFile = ui->singleImgLineEdit->text();
+    qDebug() << QDir::separator();
+    auto splited = srcFile.split( "/" );
+    splited.pop_back();
+    splited.push_back("processed.png");
+
+    auto processedFilePath = splited.join( QDir::separator() );
+
+    QImageWriter qimwr( processedFilePath );
+    qimwr.write( *pImg );
+
 //    ui->imgViewer->move(1,1);
 }
