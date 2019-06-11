@@ -37,6 +37,7 @@ HEADERS += \
         common.h \
         imgprocessor.h \
         cogprocessor.h \
+    sorter.h
 
 FORMS += \
         mainwindow.ui
